@@ -1,0 +1,69 @@
+{
+  "employees": [
+    {
+      "id": "emp-001",
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "email": "alice.johnson@bank.com",
+      "role": "ADMIN",
+      "status": "ACTIVE",
+      "createdAt": "2024-01-10T09:00:00Z",
+      "updatedAt": "2024-01-10T09:00:00Z"
+    },
+    {
+      "id": "emp-002",
+      "firstName": "Bob",
+      "lastName": "Smith",
+      "email": "bob.smith@bank.com",
+      "role": "MANAGER",
+      "status": "ACTIVE",
+      "createdAt": "2024-02-15T10:30:00Z",
+      "updatedAt": "2024-03-01T08:00:00Z"
+    },
+    {
+      "id": "emp-003",
+      "firstName": "Carol",
+      "lastName": "Davis",
+      "email": "carol.davis@bank.com",
+      "role": "SUPPORT",
+      "status": "INACTIVE",
+      "createdAt": "2024-03-20T11:00:00Z",
+      "updatedAt": "2024-04-05T14:00:00Z"
+    }
+  ],
+  "accounts": [
+    {
+      "id": "acc-001",
+      "employeeId": "emp-001",
+      "accountNumber": "1234567890123456",
+      "accountType": "CHECKING",
+      "currency": "CAD",
+      "balance": 5200.50,
+      "status": "OPEN",
+      "createdAt": "2024-01-12T10:00:00Z",
+      "updatedAt": "2024-01-12T10:00:00Z"
+    },
+    {
+      "id": "acc-002",
+      "employeeId": "emp-001",
+      "accountNumber": "9876543210987654",
+      "accountType": "SAVINGS",
+      "currency": "USD",
+      "balance": 12000.00,
+      "status": "OPEN",
+      "createdAt": "2024-01-15T11:00:00Z",
+      "updatedAt": "2024-01-15T11:00:00Z"
+    },
+    {
+      "id": "acc-003",
+      "employeeId": "emp-002",
+      "accountNumber": "1111222233334444",
+      "accountType": "SAVINGS",
+      "currency": "CAD",
+      "balance": 3400.75,
+      "status": "OPEN",
+      "createdAt": "2024-02-20T09:00:00Z",
+      "updatedAt": "2024-02-20T09:00:00Z"
+    }
+  ]
+}

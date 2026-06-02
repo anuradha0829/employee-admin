@@ -1,0 +1,59 @@
+<div class="page">
+  <div class="back-link">
+    <a routerLink="/employees">← Back to list</a>
+  </div>
+
+  <!-- Loading State -->
+  <app-loading-spinner *ngIf="loading$ | async"></app-loading-spinner>
+
+  <!-- Employee Data -->
+  <ng-container *ngIf="employee$ | async as emp">
+
+    <div class="detail-header">
+      <div>
+        <h1>{{ emp.firstName }} {{ emp.lastName }}</h1>
+        <p class="subtitle">{{ emp.email }}</p>
+      </div>
+      <div class="header-actions">
+        <a [routerLink]="['/employees', emp.id, 'edit']" class="btn btn-outline">Edit</a>
+        <button class="btn btn-danger" (click)="showConfirm = true">Delete</button>
+      </div>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="info-grid">
+      <div class="info-card">
+        <label>Role</label>
+        <span>{{ emp.role }}</span>
+      </div>
+      <div class="info-card">
+        <label>Status</label>
+        <app-status-badge [value]="emp.status"></app-status-badge>
+      </div>
+      <div class="info-card">
+        <label>Created</label>
+        <span>{{ emp.createdAt | date:'mediumDate' }}</span>
+      </div>
+      <div class="info-card">
+        <label>Last Updated</label>
+        <span>{{ emp.updatedAt | date:'mediumDate' }}</span>
+      </div>
+    </div>
+
+    <!--
+      AccountList is a CHILD component.
+      We pass employeeId via @Input() — this is the parent→child relationship.
+    -->
+    <app-account-list [employeeId]="emp.id"></app-account-list>
+
+    <!-- Delete Confirmation -->
+    <app-confirm-dialog
+      [visible]="showConfirm"
+      title="Delete Employee"
+      [message]="'Delete ' + emp.firstName + ' ' + emp.lastName + '?'"
+      (confirm)="doDelete(emp.id)"
+      (cancel)="showConfirm = false">
+    </app-confirm-dialog>
+
+  </ng-container>
+</div>

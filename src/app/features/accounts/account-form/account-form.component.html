@@ -1,0 +1,65 @@
+<div class="form-card">
+  <h3>Add Account</h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-row">
+
+      <!-- Account Number -->
+      <div class="form-group">
+        <label for="accountNumber">Account Number *</label>
+        <input
+          id="accountNumber"
+          formControlName="accountNumber"
+          class="input"
+          placeholder="16-digit number"
+          maxlength="16"
+        />
+        <span class="err" *ngIf="isInvalid('accountNumber', 'required')">Required</span>
+        <span class="err" *ngIf="isInvalid('accountNumber', 'minlength')">Must be 16 digits</span>
+      </div>
+
+      <!-- Account Type -->
+      <div class="form-group">
+        <label for="accountType">Type *</label>
+        <select id="accountType" formControlName="accountType" class="input select">
+          <option value="">Select…</option>
+          <option value="CHECKING">Checking</option>
+          <option value="SAVINGS">Savings</option>
+        </select>
+        <span class="err" *ngIf="isInvalid('accountType', 'required')">Required</span>
+      </div>
+
+      <!-- Currency -->
+      <div class="form-group">
+        <label for="currency">Currency *</label>
+        <select id="currency" formControlName="currency" class="input select">
+          <option value="CAD">CAD</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+
+      <!-- Balance -->
+      <div class="form-group">
+        <label for="balance">Balance *</label>
+        <input
+          id="balance"
+          formControlName="balance"
+          class="input"
+          type="number"
+          min="0"
+          step="0.01"
+        />
+        <span class="err" *ngIf="isInvalid('balance', 'required')">Required</span>
+        <span class="err" *ngIf="isInvalid('balance', 'min')">Balance must be ≥ 0</span>
+      </div>
+
+    </div>
+
+    <!-- Submit -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary btn-sm" [disabled]="form.invalid">
+        Save Account
+      </button>
+    </div>
+  </form>
+</div>

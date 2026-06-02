@@ -1,0 +1,76 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Employees</h1>
+    <a routerLink="/employees/new" class="btn btn-primary">+ New Employee</a>
+  </div>
+
+  <!-- Search and Filter Bar -->
+  <div class="filters">
+    <input
+      [formControl]="searchControl"
+      placeholder="Search by name or email…"
+      class="input"
+    />
+    <select [formControl]="roleControl" class="input select">
+      <option value="">All Roles</option>
+      <option value="ADMIN">Admin</option>
+      <option value="MANAGER">Manager</option>
+      <option value="SUPPORT">Support</option>
+    </select>
+    <select [formControl]="statusControl" class="input select">
+      <option value="">All Statuses</option>
+      <option value="ACTIVE">Active</option>
+      <option value="INACTIVE">Inactive</option>
+    </select>
+  </div>
+
+  <!-- Loading State -->
+  <app-loading-spinner *ngIf="loading$ | async"></app-loading-spinner>
+
+  <!-- Error State -->
+  <div class="error-box" *ngIf="error$ | async as err">{{ err }}</div>
+
+  <!-- Employee Table -->
+  <div class="table-wrap" *ngIf="!(loading$ | async)">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees$ | async">
+          <td>{{ emp.firstName }} {{ emp.lastName }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.role }}</td>
+          <td>
+            <app-status-badge [value]="emp.status"></app-status-badge>
+          </td>
+          <td class="actions">
+            <a [routerLink]="['/employees', emp.id]" class="btn btn-sm btn-secondary">View</a>
+            <a [routerLink]="['/employees', emp.id, 'edit']" class="btn btn-sm btn-outline">Edit</a>
+            <button class="btn btn-sm btn-danger" (click)="confirmDelete(emp)">Delete</button>
+          </td>
+        </tr>
+
+        <!-- Empty state -->
+        <tr *ngIf="(employees$ | async)?.length === 0">
+          <td colspan="5" class="empty">No employees found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<app-confirm-dialog
+  [visible]="showConfirm"
+  title="Delete Employee"
+  [message]="'Delete ' + (selectedEmp?.firstName ?? '') + ' ' + (selectedEmp?.lastName ?? '') + '? This cannot be undone.'"
+  (confirm)="doDelete()"
+  (cancel)="showConfirm = false">
+</app-confirm-dialog>

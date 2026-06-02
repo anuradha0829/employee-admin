@@ -1,0 +1,60 @@
+@use 'styles' as *;
+
+.form-card {
+  background: #f0f4ff;
+  border: 1px solid #c5d4f0;
+  border-radius: $radius;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  h3 {
+    margin: 0 0 16px;
+    font-size: 1rem;
+    color: #1565c0;
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+  }
+
+  .input {
+    @include input-base;
+    border-color: #b0bec5;
+
+    &:focus {
+      border-color: $primary-light;
+    }
+  }
+
+  .select {
+    cursor: pointer;
+  }
+}
+
+.err {
+  color: $error-text;
+  font-size: 0.78rem;
+  margin-top: 3px;
+}
+
+.form-actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}

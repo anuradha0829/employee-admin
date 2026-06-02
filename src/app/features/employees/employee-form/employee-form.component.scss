@@ -1,0 +1,78 @@
+@use 'styles' as *;
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px;
+
+  h1 {
+    margin: 0 0 24px;
+  }
+}
+
+.back-link {
+  margin-bottom: 16px;
+
+  a {
+    color: $primary-light;
+    text-decoration: none;
+    font-size: 0.9rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.form-card {
+  @include card;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+
+  .form-group {
+    flex: 1;
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: #444;
+    margin-bottom: 6px;
+  }
+
+  .input {
+    @include input-base;
+  }
+
+  .select {
+    cursor: pointer;
+  }
+}
+
+.err {
+  color: $error-text;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+.hint {
+  color: $text-hint;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}

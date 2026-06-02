@@ -1,0 +1,92 @@
+<div class="section">
+  <div class="section-header">
+    <h2>Accounts</h2>
+    <button class="btn btn-primary btn-sm" (click)="showAddForm = !showAddForm">
+      {{ showAddForm ? 'Cancel' : '+ Add Account' }}
+    </button>
+  </div>
+
+  <!--
+    AccountForm is a CHILD of AccountList.
+    - employeeId flows down via @Input()
+    - When saved, the form emits an @Output() event → onSaved() is called
+  -->
+  <app-account-form
+    *ngIf="showAddForm"
+    [employeeId]="employeeId"
+    (saved)="onSaved()">
+  </app-account-form>
+
+  <!-- Loading -->
+  <div *ngIf="loading$ | async" class="loading-text">Loading accounts…</div>
+
+  <!-- Accounts Table -->
+  <table class="table" *ngIf="!(loading$ | async)">
+    <thead>
+      <tr>
+        <th>Account #</th>
+        <th>Type</th>
+        <th>Currency</th>
+        <th>Balance</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let acc of accounts$ | async">
+        <!-- Mask account number — show only last 4 digits -->
+        <td class="mono">•••• {{ acc.accountNumber | slice:-4 }}</td>
+        <td>{{ acc.accountType }}</td>
+        <td>{{ acc.currency }}</td>
+        <td>{{ acc.balance | currency:acc.currency }}</td>
+        <td>
+          <app-status-badge [value]="acc.status"></app-status-badge>
+        </td>
+        <td class="actions">
+          <button
+            class="btn btn-sm btn-outline"
+            [disabled]="acc.status === 'CLOSED'"
+            (click)="confirmClose(acc)">
+            Close
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="confirmRemove(acc)">
+            Remove
+          </button>
+        </td>
+      </tr>
+
+      <!-- Empty state -->
+      <tr *ngIf="(accounts$ | async)?.length === 0">
+        <td colspan="6" class="empty">No accounts linked to this employee.</td>
+      </tr>
+    </tbody>
+
+    <!-- Total balance row in footer -->
+    <tfoot>
+      <tr class="total-row">
+        <td colspan="3"><strong>Total Balance</strong></td>
+        <td colspan="3"><strong>{{ totalBalance$ | async | number:'1.2-2' }}</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!-- Close Account Confirmation -->
+<app-confirm-dialog
+  [visible]="showCloseConfirm"
+  title="Close Account"
+  message="Mark this account as CLOSED? It will remain visible but inactive."
+  confirmLabel="Close Account"
+  (confirm)="doClose()"
+  (cancel)="showCloseConfirm = false">
+</app-confirm-dialog>
+
+<!-- Remove Account Confirmation -->
+<app-confirm-dialog
+  [visible]="showDeleteConfirm"
+  title="Remove Account"
+  message="Permanently remove this account record?"
+  confirmLabel="Remove"
+  (confirm)="doDelete()"
+  (cancel)="showDeleteConfirm = false">
+</app-confirm-dialog>

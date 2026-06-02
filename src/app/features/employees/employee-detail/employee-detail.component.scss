@@ -1,0 +1,64 @@
+@use 'styles' as *;
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.back-link {
+  margin-bottom: 16px;
+
+  a {
+    color: $primary-light;
+    text-decoration: none;
+    font-size: 0.9rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.detail-header {
+  @include flex-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0 0 4px;
+    font-size: 1.6rem;
+  }
+
+  .subtitle {
+    margin: 0;
+    color: $text-muted;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.info-card {
+  background: #f9f9f9;
+  border-radius: $radius;
+  padding: 14px 16px;
+
+  label {
+    display: block;
+    font-size: 0.75rem;
+    color: $text-hint;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+}

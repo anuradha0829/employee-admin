@@ -1,0 +1,20 @@
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &.active,
+  &.open {
+    background: #d4edda;
+    color: #1a7a3a;
+  }
+
+  &.inactive,
+  &.closed {
+    background: #f8d7da;
+    color: #a02020;
+  }
+}
