@@ -2,13 +2,10 @@
   <div class="back-link">
     <a routerLink="/employees">← Back to list</a>
   </div>
-
   <!-- Loading State -->
   <app-loading-spinner *ngIf="loading$ | async"></app-loading-spinner>
-
   <!-- Employee Data -->
   <ng-container *ngIf="employee$ | async as emp">
-
     <div class="detail-header">
       <div>
         <h1>{{ emp.firstName }} {{ emp.lastName }}</h1>
@@ -19,7 +16,6 @@
         <button class="btn btn-danger" (click)="showConfirm = true">Delete</button>
       </div>
     </div>
-
     <!-- Info Cards -->
     <div class="info-grid">
       <div class="info-card">
@@ -39,13 +35,11 @@
         <span>{{ emp.updatedAt | date:'mediumDate' }}</span>
       </div>
     </div>
-
     <!--
       AccountList is a CHILD component.
       We pass employeeId via @Input() — this is the parent→child relationship.
     -->
     <app-account-list [employeeId]="emp.id"></app-account-list>
-
     <!-- Delete Confirmation -->
     <app-confirm-dialog
       [visible]="showConfirm"
@@ -54,6 +48,5 @@
       (confirm)="doDelete(emp.id)"
       (cancel)="showConfirm = false">
     </app-confirm-dialog>
-
   </ng-container>
 </div>

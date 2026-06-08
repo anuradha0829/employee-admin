@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Employee, CreateEmployeeDto, EmployeeFilter } from '../../shared/models/models';
 
-// ── Load All ──────────────────────────────────────────────────────
+// ── Load All 
 export const loadEmployees = createAction(
   '[Employee List] Load Employees',
   props<{ filter?: EmployeeFilter }>()
@@ -15,7 +15,7 @@ export const loadEmployeesFailure = createAction(
   props<{ error: string }>()
 );
 
-// ── Load One ──────────────────────────────────────────────────────
+// ── Load One 
 export const loadEmployee = createAction(
   '[Employee Detail] Load Employee',
   props<{ id: string }>()
@@ -29,7 +29,7 @@ export const loadEmployeeFailure = createAction(
   props<{ error: string }>()
 );
 
-// ── Create ────────────────────────────────────────────────────────
+// ── Create
 export const createEmployee = createAction(
   '[Employee Form] Create Employee',
   props<{ dto: CreateEmployeeDto }>()
@@ -43,7 +43,7 @@ export const createEmployeeFailure = createAction(
   props<{ error: string }>()
 );
 
-// ── Update ────────────────────────────────────────────────────────
+// ── Update 
 export const updateEmployee = createAction(
   '[Employee Form] Update Employee',
   props<{ employee: Employee }>()
@@ -57,7 +57,7 @@ export const updateEmployeeFailure = createAction(
   props<{ error: string }>()
 );
 
-// ── Patch Status ──────────────────────────────────────────────────
+// ── Patch Status 
 export const patchEmployeeStatus = createAction(
   '[Employee List] Patch Status',
   props<{ id: string; status: 'ACTIVE' | 'INACTIVE' }>()
@@ -67,7 +67,7 @@ export const patchEmployeeStatusSuccess = createAction(
   props<{ employee: Employee }>()
 );
 
-// ── Delete ────────────────────────────────────────────────────────
+// ── Delete 
 export const deleteEmployee = createAction(
   '[Employee Detail] Delete Employee',
   props<{ id: string }>()
@@ -81,7 +81,7 @@ export const deleteEmployeeFailure = createAction(
   props<{ error: string }>()
 );
 
-// ── Select ────────────────────────────────────────────────────────
+// ── Select 
 export const selectEmployee = createAction(
   '[Employee] Select Employee',
   props<{ id: string | null }>()

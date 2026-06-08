@@ -18,7 +18,7 @@ export class EmployeeEffects {
   // When loadEmployees fires → call API → dispatch success or failure
   loadEmployees$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(EmployeeActions.loadEmployees),
+      ofType(EmployeeActions.loadEmployees), // filters action in an effect so it only runs for specific action types 
       switchMap(({ filter }) =>
         this.employeeService.getAll(filter ?? {}).pipe(
           map(employees => EmployeeActions.loadEmployeesSuccess({ employees })),

@@ -6,11 +6,6 @@
     </button>
   </div>
 
-  <!--
-    AccountForm is a CHILD of AccountList.
-    - employeeId flows down via @Input()
-    - When saved, the form emits an @Output() event → onSaved() is called
-  -->
   <app-account-form
     *ngIf="showAddForm"
     [employeeId]="employeeId"

@@ -21,10 +21,8 @@ export class AppHttpInterceptor implements HttpInterceptor {
 
     return next.handle(cloned).pipe(
       tap(() => {
-        // success – nothing extra needed
       }),
       catchError((error: HttpErrorResponse) => {
-        // Build a problem-details style error object
         const problemDetail = {
           type: 'https://httpstatuses.com/' + error.status,
           title: this.getTitle(error.status),
@@ -33,7 +31,6 @@ export class AppHttpInterceptor implements HttpInterceptor {
         };
 
         console.error(`[HTTP ERROR] ${error.status} on ${req.url}`, problemDetail);
-
         return throwError(() => problemDetail);
       })
     );

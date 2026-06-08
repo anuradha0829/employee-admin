@@ -2,11 +2,8 @@
   <div class="back-link">
     <a routerLink="/employees">← Back to list</a>
   </div>
-
   <h1>{{ isEdit ? 'Edit Employee' : 'New Employee' }}</h1>
-
   <form [formGroup]="form" (ngSubmit)="submit()" class="form-card" novalidate>
-
     <!-- First Name + Last Name row -->
     <div class="form-row">
       <div class="form-group">
@@ -16,7 +13,6 @@
           First name is required
         </span>
       </div>
-
       <div class="form-group">
         <label for="lastName">Last Name *</label>
         <input id="lastName" formControlName="lastName" class="input" />
@@ -25,7 +21,6 @@
         </span>
       </div>
     </div>
-
     <!-- Email -->
     <div class="form-group">
       <label for="email">Email *</label>
@@ -36,7 +31,6 @@
       <!-- Shows while async validator is checking -->
       <span class="hint" *ngIf="form.get('email')?.pending">Checking email…</span>
     </div>
-
     <!-- Role + Status row -->
     <div class="form-row">
       <div class="form-group">
@@ -58,17 +52,15 @@
         </select>
       </div>
     </div>
-
     <!-- Actions -->
     <div class="form-actions">
       <a routerLink="/employees" class="btn btn-secondary">Cancel</a>
       <button
         type="submit"
         class="btn btn-primary"
-        [disabled]="form.invalid || form.pending || (loading$ | async)">
+        [disabled]="(loading$ | async)">
         {{ isEdit ? 'Save Changes' : 'Create Employee' }}
       </button>
     </div>
-
   </form>
 </div>
